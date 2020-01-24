@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             if (!checkEmpty()) {
-                loginViewModel.onLoginDataUpdate(et_username.text.toString().trim(), et_password.text.toString().trim())
+                loginViewModel.onLoginDataUpdate(et_username.text.toString().trim(), et_password.text.toString())
             }
         }
     }
