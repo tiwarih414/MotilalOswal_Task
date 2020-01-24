@@ -13,6 +13,10 @@ class LoginViewModel(username: String, password: String) :
 
     init {
         loginSuccess = loginRepository.loginStatus
+        getLoginState(username, password)
+    }
+
+    fun getLoginState(username: String, password: String){
         loginRepository.getLoginState(username, password)
     }
 

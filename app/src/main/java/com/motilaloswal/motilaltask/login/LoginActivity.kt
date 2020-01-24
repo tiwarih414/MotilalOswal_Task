@@ -35,24 +35,27 @@ class LoginActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             if (!checkEmpty()) {
-
                 loginViewModel = ViewModelProvider(
                     this,
                     LoginViewModelFactory(et_username.text.toString(), et_password.text.toString())
                 ).get(LoginViewModel::class.java)
 
                 loginViewModel.getLoginRepository()?.observe(this, Observer {
-                    if (it == true) {
-                        startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
-                        editor.putString("userName", et_username.text.toString())
-                        editor.commit()
-
-                    } else {
-                        println("Himanshu Value : $it")
-                        Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
-                    }
+                    showData(it)
                 })
             }
+        }
+    }
+
+    private fun showData(checkState: Boolean) {
+        if (checkState) {
+            startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
+            editor.putString("userName", et_username.text.toString())
+            editor.commit()
+            finish()
+        } else {
+            println("Himanshu LoginState : $checkState")
+            Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
         }
     }
 
