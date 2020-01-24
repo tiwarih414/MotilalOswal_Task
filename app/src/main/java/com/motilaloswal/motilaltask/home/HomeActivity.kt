@@ -25,7 +25,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun init() {
-
         sharedPreferences = this.getSharedPreferences("Details", Context.MODE_PRIVATE)
         userName = sharedPreferences.getString("userName", "").toString()
 

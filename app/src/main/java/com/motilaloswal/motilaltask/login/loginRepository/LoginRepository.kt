@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import com.motilaloswal.motilaltask.constant.Constant
 
 class LoginRepository {
-
     var loginStatus: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getLoginState(username: String, password: String) {

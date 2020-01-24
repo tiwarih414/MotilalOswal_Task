@@ -28,7 +28,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun init() {
-
         sharedPreferences = this.getSharedPreferences("Details", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
