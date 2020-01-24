@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.motilaloswal.motilaltask.R
 import com.motilaloswal.motilaltask.home.HomeActivity
 import com.motilaloswal.motilaltask.login.loginViewModel.LoginViewModel
-import com.motilaloswal.motilaltask.login.loginViewModelFactory.LoginViewModelFactory
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -33,16 +32,14 @@ class LoginActivity : AppCompatActivity() {
         sharedPreferences = this.getSharedPreferences("Details", Context.MODE_PRIVATE)
         editor = sharedPreferences.edit()
 
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel.getLoginRepository()?.observe(this, Observer {
+            showData(it)
+        })
+
         btnLogin.setOnClickListener {
             if (!checkEmpty()) {
-                loginViewModel = ViewModelProvider(
-                    this,
-                    LoginViewModelFactory(et_username.text.toString(), et_password.text.toString())
-                ).get(LoginViewModel::class.java)
-
-                loginViewModel.getLoginRepository()?.observe(this, Observer {
-                    showData(it)
-                })
+                loginViewModel.onLoginDataUpdate(et_username.text.toString(), et_password.text.toString())
             }
         }
     }
@@ -54,7 +51,6 @@ class LoginActivity : AppCompatActivity() {
             editor.commit()
             finish()
         } else {
-            println("Himanshu LoginState : $checkState")
             Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
         }
     }

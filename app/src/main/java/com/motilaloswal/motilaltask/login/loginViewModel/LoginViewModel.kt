@@ -5,18 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.motilaloswal.motilaltask.login.loginRepository.LoginRepository
 
-class LoginViewModel(username: String, password: String) :
-    ViewModel() {
+
+class LoginViewModel : ViewModel() {
 
     private var loginSuccess: MutableLiveData<Boolean>? = null
     private var loginRepository: LoginRepository = LoginRepository()
 
     init {
         loginSuccess = loginRepository.loginStatus
-        getLoginState(username, password)
     }
 
-    fun getLoginState(username: String, password: String){
+    fun onLoginDataUpdate(username: String, password: String) {
         loginRepository.getLoginState(username, password)
     }
 
