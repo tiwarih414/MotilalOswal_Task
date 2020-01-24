@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         loginViewModel.getLoginRepository()?.observe(this, Observer {
-            showData(it)
+            checkState(it)
         })
 
         btnLogin.setOnClickListener {
@@ -44,7 +44,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun showData(checkState: Boolean) {
+    private fun checkState(checkState: Boolean) {
         if (checkState) {
             startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
             editor.putString("userName", et_username.text.toString())
