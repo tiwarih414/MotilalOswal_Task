@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         if (checkState) {
             startActivity(Intent(this@LoginActivity, HomeActivity::class.java))
             editor.putString("userName", et_username.text.toString())
-            editor.commit()
+            editor.apply()
             finish()
         } else {
             Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
